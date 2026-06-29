@@ -2,256 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Render Assignment</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 20px;
-        }
-
-        form {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        fieldset {
-            border: 1px solid #c0c0c0;
-            border-radius: 4px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-        }
-
-        legend {
-            font-size: 13px;
-            padding: 0 5px;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .form-group label.field-label {
-            width: 150px;
-            min-width: 150px;
-            padding-top: 3px;
-        }
-
-        /* Input styling to match layout */
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        select,
-        textarea {
-            width: 250px;
-            padding: 4px;
-            border: 1px solid #767676;
-            border-radius: 2px;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
-
-        textarea {
-            width: 100%;
-            max-width: 600px;
-            height: 120px;
-            resize: vertical;
-        }
-
-        /* Checkbox and Radio inline layouts */
-        .inline-options {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            padding-top: 3px;
-        }
-
-        .inline-options label {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            cursor: pointer;
-        }
-
-        /* Footer / Submit Button area */
-        .form-footer {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: right;
-        }
-
-        button[type="submit"] {
-            background-color: #0000ff;
-            color: #ffffff;
-            border: none;
-            padding: 6px 16px;
-            font-size: 13px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0000cc;
-        }
-    </style>
+    <title>Form Render</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <form action="https://teach-backend-fawn.vercel.app/api/product" method="POST" enctype="multipart/form-data">
-        
-        <fieldset>
-            <legend>General Info</legend>
-            
-            <div class="form-group">
-                <label class="field-label" for="itemName">Item Name</label>
-                <input type="text" id="itemName" name="itemName">
-            </div>
+<div class="container">
 
-            <div class="form-group">
-                <label class="field-label" for="itemDescription">Description</label>
-                <textarea id="itemDescription" name="itemDescription"></textarea>
-            </div>
+<form action="https://teach-backend-fawn.vercel.app/api/product"
+      method="POST"
+      enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label class="field-label" for="category">Category</label>
-                <select id="category" name="category">
-                    <option value="notSpecified">notSpecified</option>
-                    <option value="consumption">consumption</option>
-                    <option value="household">household</option>
-                    <option value="electronic">electronic</option>
-                    <option value="gadget">gadget</option>
-                </select>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Misc</legend>
-
-            <div class="form-group">
-                <label class="field-label" for="inventoryAmount">Inventory Amount</label>
-                <input type="number" id="inventoryAmount" name="inventoryAmount">
-            </div>
-
-            <div class="form-group">
-                <label class="field-label" for="listPrice">List price</label>
-                <input type="number" step="any" id="listPrice" name="listPrice">
-            </div>
-
-            <div class="form-group">
-                <label class="field-label">Available Stores</label>
-                <div class="inline-options">
-                    <label><input type="checkbox" name="availableStore[]" value="Bangkok"> Bangkok</label>
-                    <label><input type="checkbox" name="availableStore[]" value="Pattaya"> Pattaya</label>
-                    <label><input type      padding: 0 5px;
-    }
-
-    .form-group {
-      display: flex;
-      margin-bottom: 12px;
-      align-items: flex-start;
-    }
-
-    .form-group label {
-      width: 150px;
-      font-size: 0.9em;
-      color: #000;
-      padding-top: 4px;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group input[type="email"],
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      max-width: 450px;
-      padding: 4px 6px;
-      border: 1px solid #aaa;
-      border-radius: 2px;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-      font-size: 0.9em;
-    }
-
-    .form-group textarea {
-      height: 100px;
-      resize: vertical;
-    }
-
-    .form-group select {
-      max-width: 150px;
-    }
-
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group input[type="email"] {
-      max-width: 250px;
-    }
-
-    .inline-options {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding-top: 3px;
-    }
-
-    .inline-options label {
-      width: auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.9em;
-      cursor: pointer;
-    }
-
-    .btn-container {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 15px;
-    }
-
-    button[type="submit"] {
-      background-color: #0000ff;
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      font-size: 0.9em;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #0000cc;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="form-container">
-    <form action="https://teach-backend-fawn.vercel.app/api/product" method="POST" enctype="multipart/form-data">
-      
-      <fieldset>
+    <fieldset>
         <legend>General Info</legend>
-        
-        <div class="form-group">
-          <label for="itemName">Item Name</label>
-          <input type="text" id="itemName" name="itemName" required>
+
+        <div class="row">
+            <label>Item Name</label>
+            <input type="text" name="itemName">
         </div>
-        
-        <div class="form-group">
-          <label for="itemDescription">Description</label>
-          <textarea id="itemDescription" name="itemDescription" required></textarea>
+
+        <div class="row">
+            <label>Description</label>
+            <textarea name="itemDescription"></textarea>
         </div>
-        
-        <div class="form-group">
-          <label for="category">Category</label>
-          <select id="category" name="category">
-            <option value="notSpecified">notSpecified</option>
-            <option value="consumption">consumption</option>
-            <option value="household">household</option>
-            <option value="electronic">electronic</option>
+
+        <div class="row">
+            <label>Category</label>
+
+            <select name="category">
+                <option value="notSpecified">notSpecified</option>
+                <option value="consumption">consumption</option>
+                <option value="household">household</option>
+                <option value="electronic">electronic</option>
+                <option value="gadget">gadget</option>
+            </select>
+        </div>
+
+    </fieldset>
+
+
+    <fieldset>
+
+        <legend>Misc.</legend>
+
+        <div class="row">
+            <label>Inventory Amount</label>
+            <input type="number" name="inventoryAmount">
+        </div>
+
+        <div class="row">
+            <label>List Price</label>
+            <input type="number" name="listPrice">
+        </div>
+
+        <div class="row">
+            <label>Available Stores</label>
+
+            <div class="inline">
+                <label><input type="checkbox" name="availableStore[]" value="Bangkok"> Bangkok</label>
+
+                <label><input type="checkbox" name="availableStore[]" value="Pattaya"> Pattaya</label>
+
+                <label><input type="checkbox" name="availableStore[]" value="Phuket"> Phuket</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <label>Status</label>
+
+            <div class="inline">
+
+                <label>
+                    <input type="radio" name="status" value="Active">
+                    Active
+                </label>
+
+                <label>
+                    <input type="radio" name="status" value="Inactive">
+                    Inactive
+                </label>
+
+            </div>
+
+        </div>
+
+    </fieldset>
+
+    <fieldset>
+
+        <legend>Staff</legend>
+
+        <div class="row">
+            <label>Staff Email</label>
+
+            <input type="email" name="staffEmail" required>
+
+        </div>
+
+    </fieldset>
+
+    <div class="button-area">
+        <button type="submit">Submit Form</button>
+    </div>
+
+</form>
+
+</div>
+
+</body>
+</html>
