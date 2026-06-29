@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Render</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f9f9f9;
+      margin: 20px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-container {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      padding: 15px 20px;
+    }
+
+    legend {
+      font-size: 0.9em;
+      color: #333;
+      padding: 0 5px;
+    }
+
+    .form-group {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .form-group label {
+      width: 150px;
+      font-size: 0.9em;
+      color: #000;
+      padding-top: 4px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="email"],
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      max-width: 450px;
+      padding: 4px 6px;
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      font-size: 0.9em;
+    }
+
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    .form-group select {
+      max-width: 150px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group input[type="email"] {
+      max-width: 250px;
+    }
+
+    .inline-options {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-top: 3px;
+    }
+
+    .inline-options label {
+      width: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    button[type="submit"] {
+      background-color: #0000ff;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      font-size: 0.9em;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0000cc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <form action="https://teach-backend-fawn.vercel.app/api/product" method="POST" enctype="multipart/form-data">
+      
+      <fieldset>
+        <legend>General Info</legend>
+        
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" name="itemName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="itemDescription">Description</label>
+          <textarea id="itemDescription" name="itemDescription" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="notSpecified">notSpecified</option>
+            <option value="consumption">consumption</option>
+            <option value="household">household</option>
+            <option value="electronic">electronic</option>
