@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess Game</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .main-container {
+      background-color: white;
+      border-radius: 4px;
+      width: 90%;
+      max-width: 500px;
+      height: 100%;
+      padding: 4px;
+    }
+
+    .input {
+      font-size: 1.25em;
+      background-color: white;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .input input {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-size: 1.05em;
+      border-radius: 4px;
+      border-width: 1px;
+      padding-left: 10px;
+      width: 100%;
+      max-width: 250px;
+      box-sizing: border-box;
+    }
+
+    /* Target buttons inside container */
+    .btn-container button {
+      font-size: 1em;
+      margin-top: 20px;
+      padding: 7px 15px;
+      border-radius: 8px;
+      background-color: blue;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-container button:hover {
+      background-color: darkblue;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin-top: 20px;
+    }
+
+    .display-area {
+      margin-top: 10px;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    <h2>Guess Game</h2>
+    <p>Guess a number between 1 - 20, you have 5 chances.</p>
+    
+    <div class="input">
+      <input type="text" id="guess-input">
+    </div>
+
+    <div class="btn-container">
+      <button id="guess-btn">Guess!</button>
+      <button id="restart-btn">Restart</button>
+    </div>
+
+    <hr>
+
+    <div class="display-area">
+      <div id="attempt-label">Attempt 0/5</div>
+      <div id="result-label"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- State Variables ---
+    let targetValue = null;
+    let attemptsUsed = 0;
+    const maxAttempts = 5;
+
+    // --- DOM Elements ---
+    const guessInput = document.getElementById('guess-input');
+    const guessBtn = document.getElementById('guess-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const attemptLabel = document.getElementById('attempt-label');
+    const resultLabel = document.getElementById('result-label');
+
+    // Helper utility to strictly check numerical status
+    function isNumeric(val) {
+      if (val.trim() === "") return false;
+      return !isNaN(val) && !isNaN(parseFloat(val));
+    }
+
+    // --- State 1: Initialization / Refresh ---
+    function initGame() {
+      guessInput.value = "";
+      guessInput.disabled = true; // Block manual inputs before clicking restart
+      
+      guessBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+      
+      attemptLabel.textContent = `Attempt 0/${maxAttempts}`;
+      resultLabel.textContent = "";
+    }
+
+    // --- State 2: Game Setup (Restart Button Click) ---
+    function startNewGame() {
+      // Set random target between 1 and 20
+      targetValue = Math.floor(Math.random() * 20) + 1;
+      attemptsUsed = 0;
+
+      guessInput.value = "";
+      guessInput.disabled = false;
+      
+      restartBtn.style.display = "none";
+      guessBtn.style.display = "inline-block";
+      
+      attemptLabel.textContent = `Attempt 0/${maxAttempts}`;
+      resultLabel.textContent = "";
+      
+      guessInput.focus();
+    }
+
+    // --- State 3: Assessment Logic (Guess Button Click) ---
+    function handleGuess() {
+      const inputValue = guessInput.value;
+
+      // Rule: Check if empty or non-number, do nothing
+      if (!isNumeric(inputValue)) {
+        return;
+      }
+
+      const numericalGuess = parseInt(inputValue, 10);
+      attemptsUsed++;
+      attemptLabel.textContent = `Attempt ${attemptsUsed}/${maxAttempts}`;
+
+      // Win Condition Check
+      if (numericalGuess === targetValue) {
+        resultLabel.textContent = "You WIN";
+        endGameSession();
+        return;
+      } 
+      
+      // Feedback Condition Checks
+      if (numericalGuess > targetValue) {
+        resultLabel.textContent = `${numericalGuess} is too high`;
+      } else {
+        resultLabel.textContent = `${numericalGuess} is too low`;
+      }
+
+      // Max Attempts / Lose Condition Check
+      if (attemptsUsed >= maxAttempts) {
+        resultLabel.textContent = "You LOSE";
+        endGameSession();
+        return;
+      }
+
+      // Prepare UI for the next attempt loop
+      guessInput.value = "";
+      guessInput.focus();
+    }
+
+    // Wrap up execution sequence
+    function endGameSession() {
+      guessInput.disabled = true;
+      guessBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+    }
+
+    // --- Event Handlers ---
+    restartBtn.addEventListener('click', startNewGame);
+    guessBtn.addEventListener('click', handleGuess);
+
+    // Support submitting guess via the Enter key
+    guessInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && guessBtn.style.display !== 'none') {
+        handleGuess();
+      }
+    });
+
+    // Run primary initial configuration on mount
+    initGame();
+  </script>
+
+</body>
+</html>
